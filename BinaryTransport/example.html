@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>BinaryTransport</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="jquery.binarytransport.js"></script>
+	<script type="text/javascript">
+	$( document ).ready(function(){
+		// displays image
+		var showImage = function(result){
+			  // use URL context to display image
+			  var url = window.URL || window.webkitURL;
+			  $("#image").html($("<img/>",{src:url.createObjectURL(result)}));
+		};
+		// click on blob button
+		$("#blob").click(function(e){
+			// blob ajax request
+			$.ajax({
+			  url: "blob.png",
+			  type: "GET",
+			  dataType: 'binary',
+			  processData: false,
+			  success: function(result){
+				  showImage(result);
+			  }
+			});		
+		});
+		// click on arraybuffer button
+		$("#arraybuffer").click(function(e){
+			// arraybuffer ajax request
+			$.ajax({
+			  url: "arraybuffer.png",
+			  type: "GET",
+			  dataType: 'binary',
+			  responseType:'arraybuffer',
+			  processData: false,
+			  success: function(result){				  
+				  // create unsigned Int array and convert this array into blob
+				  var arrayBufferView = new Uint8Array(result );
+				  result = new Blob( [ arrayBufferView ], { type: "image/png" } );
+				  showImage(result);
+			  }
+			});	
+		});
+	});
+	</script>
+</head>
+<body>
+<button id="blob">Download blob</button> 
+<button id="arraybuffer">Download arraybuffer</button> 
+<div id="image"></div>
+</body>
+</html>
