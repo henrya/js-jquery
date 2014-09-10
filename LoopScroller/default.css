@@ -1,0 +1,24 @@
+// loopscroller default css
+.loop-scroll-list {
+    height: 35px;
+    list-style: none outside none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 980px;
+}
+.loop-scroll-list ul, .loop-scroll-list div {
+    position: absolute;
+}
+.loop-scroll-list li, .loop-scroll-list p {
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.loop-scroll-list li img, .loop-scroll-list p img {
+    border: medium none;
+    display: block;
+}
