@@ -20,14 +20,14 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
                 var xhr = new XMLHttpRequest(),
                     url = options.url,
                     type = options.type,
-		    // blob or arraybuffer. Default is blob
+		// blob or arraybuffer. Default is blob
                     dataType = options.responseType || "blob",
                     data = options.data || null;
 				
                 xhr.addEventListener('load', function(){
                     var data = {};
                     data[options.dataType] = xhr.response;
-		    // make callback and send data
+		// make callback and send data
                     callback(xhr.status, xhr.statusText, data, xhr.getAllResponseHeaders());
                 });
 
