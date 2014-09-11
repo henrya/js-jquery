@@ -27,8 +27,8 @@ $.loopSlider = function(el,options) {
 		showArrows:false,
 		containerClass:'loop-slider-list',
 		pagerClass:'pager',
-		arrowsClass:'arrows',
-	}	
+		arrowsClass:'arrows'
+	};	
 		
 	this.options = $.extend({}, defaults, options || {});		
 	this.mainContainer = $(el);	
@@ -62,7 +62,7 @@ $.loopSlider.fn.extend({
 			this.items.each(function(i) { 
 					$(this).css({float:'left',width:self.list.width()}).addClass('slide-'+(i+1));
 					self.totalWidth+=$(this).outerWidth(true); 
-					if(i == 0) {
+					if(i === 0) {
 						$(this).addClass('active');
 					}
 				}
@@ -193,5 +193,5 @@ $.loopSlider.fn.extend({
 		});	
 		this.pager = this.mainContainer.parent().children("."+this.options.pagerClass);		
 	}
-});	  
+});
 })(jQuery,window);
