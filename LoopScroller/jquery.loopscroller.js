@@ -4,7 +4,7 @@
 *
 * @description. Another jQuery slider. Works well with any content.
 * @version 1.0 
-* @copyright 2014 Henry Algus. All rights reserved.
+* @author Henry Algus <henryalgus@gmail.com>
 *
 */
 

@@ -4,7 +4,7 @@
  *
  * @description. jQuery ajax transport for making binary data type requests.
  * @version 1.0 
- * @copyright 2014 Henry ALgus. All rights reserved.
+ * @author Henry Algus <henryalgus@gmail.com>
  *
  */
 
