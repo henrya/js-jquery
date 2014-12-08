@@ -22,7 +22,8 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
                     type = options.type,
 		// blob or arraybuffer. Default is blob
                     dataType = options.responseType || "blob",
-                    data = options.data || null;
+                    data = options.data || null,
+                    contentType = options.contentType;
 				
                 xhr.addEventListener('load', function(){
                     var data = {};
@@ -32,6 +33,7 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
                 });
 
                 xhr.open(type, url, true);
+                xhr.setRequestHeader('Content-Type', contentType);
                 xhr.responseType = dataType;
                 xhr.send(data);
             },
