@@ -2,12 +2,33 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>ArrayBuffer and Blob support detection</title>
+	<title>Xhr2 responseType feature test</title>
+	<style type="text/css">
+		ul {
+			list-style-type:none;
+			padding:0;
+			margin:0;
+		}	
+		li {
+			padding:10px;
+			color:#fff;
+			border:1px solid #000;
+		}
+		.pass {
+			background:green;
+		 }
+		.fail {
+			background:red;
+		}
+	</style>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function(){
 		// check for native XHR2 response type support
 		var isSupported = function(responseType){
+			if (typeof XMLHttpRequest == 'undefined') {
+				return false;
+			}
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', '/');
 			try {
@@ -19,14 +40,27 @@
 		};
 		
 		$("#browser").text(navigator.userAgent.toLowerCase());
-		$("#blob").text((isSupported('blob')?'yes':'no')); 
-		$("#arraybuffer").text((isSupported('arraybuffer')?'yes':'no')); 
+		
+		var detectables = ["blob","arraybuffer"];
+		for(i in detectables){
+			var l = $("<li/>");
+			var s = isSupported(detectables[i]);
+			if(s){
+				l.addClass('pass');
+				l.html(detectables[i]+ " support: <strong>yes</strong>");
+			} else {
+				l.addClass('fail');
+				l.html(detectables[i]+ " support: <strong>no</strong>");
+			}
+			$("#detectables").append(l);
+		}
 	});
 	</script>
 </head>
 <body>
-<strong>Browser:</strong><span id="browser"></span><br />
-<strong>Blob supported:</strong><span id="blob"></span><br />
-<strong>ArrayBuffer supported:</strong><span id="arraybuffer"></span>
+<h1>Xhr2 responseType feature test</h1>
+<p><strong>Browser:</strong><span id="browser"></span></p>
+<ul id="detectables">
+</ul>
 </body>
 </html>
