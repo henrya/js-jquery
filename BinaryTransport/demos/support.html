@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Xhr2 responseType feature test</title>
+	<title>Xhr2 Blob/ArrayBuffer feature test</title>
 	<style type="text/css">
 		ul {
 			list-style-type:none;
@@ -32,16 +32,26 @@
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', '/');
 			try {
-				xhr.responseType = responseType;
+				xhr.responseType = responseType.toLowerCase();
 			} catch (e) {
 				return false;
 			}
-		   	return xhr.responseType === responseType;
+		   	var x = xhr.responseType === responseType.toLowerCase();
+			// response type support detected, move on..
+			if(x){
+				if(window[responseType]){
+					return x;
+				} else {
+					return false;
+				}
+			} else {
+				return x;
+			}
 		};
 		
 		$("#browser").text(navigator.userAgent.toLowerCase());
 		
-		var detectables = ["blob","arraybuffer"];
+		var detectables = ["Blob","ArrayBuffer"];
 		for(i in detectables){
 			var l = $("<li/>");
 			var s = isSupported(detectables[i]);
@@ -58,7 +68,7 @@
 	</script>
 </head>
 <body>
-<h1>Xhr2 responseType feature test</h1>
+<h1>Xhr2 Blob/ArrayBuffer feature test</h1>
 <p><strong>Browser:</strong><span id="browser"></span></p>
 <ul id="detectables">
 </ul>
