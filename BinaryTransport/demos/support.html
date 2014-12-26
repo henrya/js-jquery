@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>ArrayBuffer and Blob support detection</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="jquery.binarytransport.js"></script>
+	<script type="text/javascript">
+	$( document ).ready(function(){
+		// check for native XHR2 response type support
+		var isSupported = function(responseType){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', '/');
+			try {
+				xhr.responseType = responseType;
+			} catch (e) {
+				return false;
+			}
+		   	return xhr.responseType === responseType;
+		};
+		
+		$("#browser").text(navigator.userAgent.toLowerCase());
+		$("#blob").text((isSupported('blob')?'yes':'no')); 
+		$("#arraybuffer").text((isSupported('arraybuffer')?'yes':'no')); 
+	});
+	</script>
+</head>
+<body>
+<strong>Browser:</strong><span id="browser"></span><br />
+<strong>Blob supported:</strong><span id="blob"></span><br />
+<strong>ArrayBuffer supported:</strong><span id="arraybuffer"></span>
+</body>
+</html>
