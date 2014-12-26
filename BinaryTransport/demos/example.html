@@ -4,9 +4,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>BinaryTransport</title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="jquery.binarytransport.js"></script>
+	<script src="//raw.githubusercontent.com/henrya/js-jquery/master/BinaryTransport/jquery.binarytransport.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function(){
+		// disable ajax cache for debugging
+		$.ajaxSetup ({
+		    cache: false
+		});	
 		// displays image
 		var showImage = function(result){
 			  // use URL context to display image
@@ -23,6 +27,10 @@
 			  processData: false,
 			  success: function(result){
 				  showImage(result);
+			  },
+			  error: function (xhr, ajaxOptions, thrownError) {
+				  //console.log(xhr.status);
+			      //console.log(thrownError);
 			  }
 			});		
 		});
@@ -40,6 +48,10 @@
 				  var arrayBufferView = new Uint8Array(result );
 				  result = new Blob( [ arrayBufferView ], { type: "image/png" } );
 				  showImage(result);
+			  },
+			  error: function (xhr, ajaxOptions, thrownError) {
+				  //console.log(xhr.status);
+			      //console.log(thrownError);
 			  }
 			});	
 		});
