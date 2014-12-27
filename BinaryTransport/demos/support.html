@@ -38,10 +38,9 @@
 		};
 		$("#browser").text(navigator.userAgent.toLowerCase());	
 		var detectables = ["Blob","ArrayBuffer"];
-		for(i in detectables){
+		for(var i in detectables){
 			var l = $("<li/>");
-			var s = isSupported(detectables[i]);
-			if(s){
+			if(isSupported(detectables[i])){
 				l.addClass('pass').html(detectables[i]+ " support: <strong>yes</strong>");
 			} else {
 				l.addClass('fail').html(detectables[i]+ " support: <strong>no</strong>");
