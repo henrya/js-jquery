@@ -18,20 +18,31 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
             send: function(_, callback){
 		// setup all variables
                 var xhr = new XMLHttpRequest(),
-                    url = options.url,
-                    type = options.type,
+		url = options.url,
+		type = options.type,
+		async = options.async || true,
+		// allow to set custom header
+		headers = options.headers || {},
 		// blob or arraybuffer. Default is blob
-                    dataType = options.responseType || "blob",
-                    data = options.data || null;
-				
+		dataType = options.responseType || "blob",
+		data = options.data || null,
+		username = options.username || null,
+		password = options.password || null;
+					
                 xhr.addEventListener('load', function(){
-                    var data = {};
-                    data[options.dataType] = xhr.response;
-		// make callback and send data
-                    callback(xhr.status, xhr.statusText, data, xhr.getAllResponseHeaders());
+			var data = {};
+			data[options.dataType] = xhr.response;
+			// make callback and send data
+			callback(xhr.status, xhr.statusText, data, xhr.getAllResponseHeaders());
                 });
 
-                xhr.open(type, url, true);
+                xhr.open(type, url, async, username, password);
+				
+		// setup custom headers
+		for (var i in headers ) {
+			xhr.setRequestHeader(i, headers[i] );
+		}
+				
                 xhr.responseType = dataType;
                 xhr.send(data);
             },

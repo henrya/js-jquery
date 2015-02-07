@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>BinaryTransport</title>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//raw.githubusercontent.com/henrya/js-jquery/master/BinaryTransport/jquery.binarytransport.js"></script>
 	<script type="text/javascript">
 	$( document ).ready(function(){
@@ -24,6 +24,7 @@
 			  url: "images/blob.png",
 			  type: "GET",
 			  dataType: 'binary',
+			  headers:{'Content-Type':'image/png','X-Requested-With':'XMLHttpRequest'},
 			  processData: false,
 			  success: function(result){
 				  showImage(result);
