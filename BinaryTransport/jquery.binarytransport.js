@@ -15,14 +15,12 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
     {
         return {
             // create new XMLHttpRequest
-            send: function(_, callback){
+            send: function(headers, callback){
 		// setup all variables
                 var xhr = new XMLHttpRequest(),
 		url = options.url,
 		type = options.type,
 		async = options.async || true,
-		// allow to set custom header
-		headers = options.headers || {},
 		// blob or arraybuffer. Default is blob
 		dataType = options.responseType || "blob",
 		data = options.data || null,
