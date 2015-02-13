@@ -44,9 +44,7 @@ $.ajaxTransport("+binary", function(options, originalOptions, jqXHR){
                 xhr.responseType = dataType;
                 xhr.send(data);
             },
-            abort: function(){
-                jqXHR.abort();
-            }
+            abort: function(){}
         };
     }
 });
