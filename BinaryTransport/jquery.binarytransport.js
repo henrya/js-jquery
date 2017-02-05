@@ -35,6 +35,12 @@
                         // make callback and send data
                         callback(xhr.status, xhr.statusText, data, xhr.getAllResponseHeaders());
                     });
+                    xhr.addEventListener('error', function() {
+                        var data = {};
+                        data[options.dataType] = xhr.response;
+                        // make callback and send data
+                        callback(xhr.status, xhr.statusText, data, xhr.getAllResponseHeaders());
+                    });
 
                     xhr.open(type, url, async, username, password);
 
