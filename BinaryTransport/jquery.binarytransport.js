@@ -22,7 +22,7 @@
                     var xhr = new XMLHttpRequest(),
                         url = options.url,
                         type = options.type,
-                        async = options.async || true,
+                        async = options.async !== false,
                         // blob or arraybuffer. Default is blob
                         dataType = options.responseType || "blob",
                         data = options.data || null,
