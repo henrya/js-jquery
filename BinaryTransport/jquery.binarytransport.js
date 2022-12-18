@@ -29,6 +29,8 @@
                         username = options.username || null,
                         password = options.password || null;
 
+                    this.xhr = xhr;
+
                     xhr.addEventListener('load', function() {
                         var data = {};
                         data[options.dataType] = xhr.response;
@@ -52,7 +54,9 @@
                     xhr.responseType = dataType;
                     xhr.send(data);
                 },
-                abort: function() {}
+                abort: function() {
+                    this.xhr.abort();
+                }
             };
         }
     });
